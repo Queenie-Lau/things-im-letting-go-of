@@ -1,3 +1,38 @@
+// GSAP animations
+const mm = gsap.matchMedia();
+
+mm.add("(min-width: 768px)", () => {
+  gsap.set("#things", { opacity: 0 });
+  gsap.to("#things", { x: 10, duration: 2, ease: "power3.out", opacity: 1, delay: 0.5 });
+
+  gsap.set("#im", { opacity: 0 });
+  gsap.to("#im", { x: -100, opacity: 1, duration: 2, ease: "power3.out", delay: .8 });
+
+  gsap.set("#letting", { opacity: 0 });
+  gsap.to("#letting", { x: 50, opacity: 1, duration: 2, ease: "power3.out", delay: 1 });
+
+  gsap.set("#go", { opacity: 0 });
+  gsap.to("#go", { x: 200, opacity: 1, duration: 2, ease: "power3.out", delay: 1.5 });
+  gsap.set("#of", { opacity: 0 });
+  gsap.to("#of", { x: -200, opacity: 1, duration: 2, ease: "power3.out", delay: 2 });
+});
+
+mm.add("(max-width: 767px)", () => {
+  gsap.set("#things", { opacity: 0, y: -50 });
+  gsap.to("#things", { y: 0, duration: 2, ease: "power3.out", opacity: 1, delay: 0.5 });
+
+  gsap.set("#im", { opacity: 0, y: -50 });
+  gsap.to("#im", { y: 0, opacity: 1, duration: 2, ease: "power3.out", delay: .8 });
+
+  gsap.set("#letting", { opacity: 0, y: -50 });
+  gsap.to("#letting", { y: 0, opacity: 1, duration: 2, ease: "power3.out", delay: 1 });
+
+  gsap.set("#go", { opacity: 0, y: -50 });
+  gsap.to("#go", { y: 0, opacity: 1, duration: 2, ease: "power3.out", delay: 1.5 });
+  gsap.set("#of", { opacity: 0, y: -50 });
+  gsap.to("#of", { y: 0, opacity: 1, duration: 2, ease: "power3.out", delay: 2 });
+});
+
 const beginBtn = document.getElementById("beginBtn");
 const landing = document.getElementById("landing");
 const writing = document.getElementById("writing");
