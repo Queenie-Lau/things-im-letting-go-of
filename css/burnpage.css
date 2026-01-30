@@ -1,0 +1,62 @@
+* {
+    box-sizing: border-box;
+    font-family: "Neo Contact W01 Regular";
+}
+
+body {
+    overflow-x: hidden;
+    padding: 2%;
+    position: relative;
+}
+
+#bg {
+    position: fixed;
+    inset: 0;
+    background-image: url('/assets/bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -10;
+}
+
+.paper {
+    position: relative;
+    background-image: url('/assets/pasted-paper.jpg');
+    background-size: 100% 100%;
+    width: 480px;
+    padding: 40px;
+    margin: 0 auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+#burnCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: none;
+    pointer-events: none;
+}
+
+.paper h2 {
+    margin-top: 0;
+}
+
+.line {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+input {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    flex: 1;
+    font-size: 16px;
+    background: transparent;
+}
+
+input:focus {
+    outline: none;
+    border-bottom-color: #000;
+}

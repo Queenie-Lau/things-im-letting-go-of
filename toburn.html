@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Things I'm Letting Go Of</title>
+    <link rel="stylesheet" href="/css/burnpage.css" />
+    <link
+      href="https://db.onlinewebfonts.com/c/5bccce5421f46f5344ccef51f9c4dbb6?family=Neo+Contact+W01+Regular"
+      rel="stylesheet"
+    />
+    <link
+      href="https://db.onlinewebfonts.com/c/351c65048c69125fa2f3421ec197545d?family=Aileron"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="bg"></div>
+    <!-- Writing Screen -->
+    <section id="note">
+      akin to film, even the digital can become permanent. once you type, your
+      words will be immortalized and unable to be deleted until burned
+    </section>
+    <section id="writing" class="screen">
+      <div class="paper">
+        <h2>Things I’m letting go of</h2>
+        <div id="list">
+          <div class="line">
+            <span>1.</span>
+            <input type="text" autofocus />
+          </div>
+        </div>
+        <button id="burnBtn" disabled>BURN</button>
+        <canvas
+          id="burnCanvas"
+          style="position: absolute; top: 0; left: 0; pointer-events: none"
+        ></canvas>
+      </div>
+    </section>
+    <script src="/js/burn.js"></script>
+  </body>
+</html>
