@@ -24,7 +24,7 @@ nav, h3 {
 
 #landing {
     transform: translateY(-100px);
-    margin-top: 0%;
+    margin-top: 3%;
 }
 
 .top {
@@ -103,17 +103,27 @@ h1 {
     color: #ff2a1a;
 }
 
+.beginBtnContainer {
+    display: flex;
+    justify-content: left;
+    margin-top: 8%;
+    margin-left: 18%;
+}
+
 button {
     font-size: 25px;
-    border-radius: 999px;
+    height: 9vw;
+    width: 9vw;
+    border-radius: 50%;
     border: 1px solid #ff2a1a;
     background: transparent;
     color: #ff2a1a;
     cursor: pointer;
-    margin-top: 5%;
-    margin-right: 75%;
-    margin-left: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    padding: 0;
 }
 
 button:disabled {
