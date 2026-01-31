@@ -18,7 +18,7 @@ body {
 #bg {
     position: fixed;
     inset: 0;
-    background-image: url('/assets/bg.png');
+    background-image: url('assets/bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -32,7 +32,7 @@ body {
 ------------------------------------------- */
 .paper {
     position: relative;
-    background-image: url('/assets/pasted-paper.jpg');
+    background-image: url('assets/pasted-paper.jpg');
     background-size: 100% 100%;
     width: 480px;
     padding: 40px;
