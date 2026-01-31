@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,28 +13,42 @@
       href="https://db.onlinewebfonts.com/c/351c65048c69125fa2f3421ec197545d?family=Aileron"
       rel="stylesheet"
     />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   </head>
+  <nav>
+    <h3 id="name">✢ QUEENIE LAU ✢</h3>
+  </nav>
   <body>
     <div id="bg"></div>
     <!-- Writing Screen -->
     <section id="note">
-      akin to film, even the digital can become permanent. once you type, your
-      words will be immortalized and unable to be deleted until burned
+      akin to film, even the digital can become permanent. <br />once you type,
+      your words will be immortalized and unable to be deleted until burned
     </section>
     <section id="writing" class="screen">
       <div class="paper">
-        <h2>Things I’m letting go of</h2>
+        <h2>Things I’m Letting Go Of</h2>
         <div id="list">
           <div class="line">
             <span>1.</span>
             <input type="text" autofocus />
           </div>
         </div>
-        <button id="burnBtn" disabled>BURN</button>
         <canvas
           id="burnCanvas"
           style="position: absolute; top: 0; left: 0; pointer-events: none"
         ></canvas>
+      </div>
+      <div class="burnOrSaveContainer">
+        <div class="burnBtnContainer">
+          <button id="burnBtn" disabled>BURN IT DOWN</button>
+        </div>
+        <!-- <div class="saveAsPng">
+          <button id="saveAsPngBtn">SAVE YOUR NOTE</button>
+        </div> -->
+      </div>
+      <div id="resetBtnContainer">
+        <button id="resetBtn" style="display: none">WRITE ANOTHER NOTE</button>
       </div>
     </section>
     <script src="/js/burn.js"></script>

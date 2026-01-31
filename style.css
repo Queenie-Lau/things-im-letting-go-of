@@ -2,6 +2,7 @@
     box-sizing: border-box;
     font-family: "Neo Contact W01 Regular";
 }
+
 nav, h3 {
     font-family: "Aileron";
     font-size: 15px;
@@ -72,7 +73,7 @@ body::after {
     background-image: url('assets/pasted-paper.jpg');
     background-size: cover;
     mix-blend-mode: multiply;
-    opacity: 0.5;
+    opacity: 0.1;
     pointer-events: none;
     z-index: 100;
 }

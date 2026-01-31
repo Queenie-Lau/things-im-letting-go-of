@@ -16,22 +16,43 @@ const ctx = canvas.getContext('2d');
 const paperImg = new Image();
 paperImg.src = '/assets/pasted-paper.jpg';
 
-// 1. INPUT LOGIC
-list.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
+// 1. INPUT LOGIC: typing + creating new lines + enabling burn
+function setupInputLogic() {
+    const list = document.getElementById("list");
+
+    // Enable burn button as soon as there's any text
+    list.addEventListener('input', () => {
+        const anyFilled = Array.from(list.querySelectorAll('input'))
+            .some(input => input.value.trim() !== '');
+        burnBtn.disabled = !anyFilled || isBurning;
+    });
+
+    // Handle Enter key for adding new lines
+    list.addEventListener("keydown", (e) => {
+        if (e.key !== "Enter") return;
         e.preventDefault();
+
         const input = e.target;
         if (!input.value.trim() || isBurning) return;
+
+        // Disable current input after typing
         input.disabled = true;
+
+        // Increment count and create new line
         count++;
         const line = document.createElement("div");
         line.className = "line";
         line.innerHTML = `<span>${count}.</span><input type="text" autofocus />`;
         list.appendChild(line);
+
+        // Focus new input
         line.querySelector("input").focus();
-        burnBtn.disabled = false;
-    }
-});
+    });
+}
+
+// Initialize input logic
+setupInputLogic();
+
 
 // 2. CAPTURE CONTENT
 async function captureContent() {
@@ -50,13 +71,38 @@ async function captureContent() {
     ctx.fillStyle = "black";
     ctx.font = `${h2Style.fontWeight} ${h2Style.fontSize} ${h2Style.fontFamily}`;
     ctx.textBaseline = "top";
-    ctx.fillText("Things I’m letting go of", pLeft, pTop);
+    ctx.fillText("Things I’m Letting Go Of", pLeft, pTop);
 
     ctx.font = `${inputStyle.fontSize} ${inputStyle.fontFamily}`;
-    document.querySelectorAll('#list input').forEach((input, i) => {
-        ctx.fillText(`${i + 1}. ${input.value}`, pLeft, pTop + 70 + (i * 35));
-    });
+    ctx.textBaseline = 'top';
 
+    document.querySelectorAll('#list .line').forEach(line => {
+    const span = line.querySelector('span');
+    const input = line.querySelector('input');
+
+    const paperRect = paper.getBoundingClientRect();
+    const spanRect = span.getBoundingClientRect();
+    const inputRect = input.getBoundingClientRect();
+
+    const spanStyle = window.getComputedStyle(span);
+    const inputStyle = window.getComputedStyle(input);
+
+    // Draw number
+    ctx.font = `${spanStyle.fontSize} ${spanStyle.fontFamily}`;
+    ctx.fillText(
+        span.textContent,
+        spanRect.left - paperRect.left,
+        spanRect.top - paperRect.top
+    );
+
+    // Draw text — no extra gap added
+    ctx.font = `${inputStyle.fontSize} ${inputStyle.fontFamily}`;
+    ctx.fillText(
+        input.value,
+        inputRect.left - paperRect.left,
+        inputRect.top - paperRect.top
+    );
+    });
     capturedImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 }
 
@@ -70,8 +116,7 @@ function initBurn() {
         Array.from(paper.children).forEach(c => { if (c.id !== 'burnCanvas') c.style.opacity = '0'; });
         canvas.style.display = 'block';
 
-        // Add 3-5 random ignition points (seeds)
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 5; i++) {
             seeds.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
@@ -87,28 +132,45 @@ function initBurn() {
 }
 
 function updateLoop() {
-    if (!isBurning) return;
+  if (!isBurning) return;
 
-    // 1. Draw original paper
-    ctx.putImageData(capturedImageData, 0, 0);
+  ctx.putImageData(capturedImageData, 0, 0);
 
-    // 2. Process seeds (Expanding holes)
-    seeds.forEach(seed => {
-        if (seed.r < seed.maxR) {
-            seed.r += 0.8; // Control speed of burn expansion
-            drawOrganicHole(seed);
-        }
-    });
+  seeds.forEach(seed => {
+    if (seed.r < seed.maxR) {
+      seed.r += 0.5;
+      drawOrganicHole(seed);
+    }
+  });
 
-    // 3. Ash Particles
-    particles.forEach((p, i) => {
-        p.update();
-        p.draw();
-        if (p.life <= 0) particles.splice(i, 1);
-    });
+  particles.forEach((p, i) => {
+    p.update();
+    p.draw();
+    if (p.life <= 0) particles.splice(i, 1);
+  });
 
-    requestAnimationFrame(updateLoop);
+  if (burnFinished()) {
+    endBurn();
+    return;
+  }
+
+  requestAnimationFrame(updateLoop);
 }
+
+function endBurn() {
+  isBurning = false;
+
+  // Fully clear canvas (no coming back)
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Remove paper visually
+  paper.style.display = 'none';
+  burnBtn.textContent = '';
+
+  // Show reset button
+  showResetButton();
+}
+
 
 function drawOrganicHole(seed) {
     // We use a "Destination-Out" mode to eat away at the putImageData
@@ -163,4 +225,34 @@ class AshParticle {
     }
 }
 
+function burnFinished() {
+  return seeds.every(seed => seed.r >= seed.maxR);
+}
+
 burnBtn.addEventListener('click', initBurn);
+
+const resetBtn = document.getElementById('resetBtn');
+
+function showResetButton() {
+  resetBtn.style.display = 'block';
+}
+
+resetBtn.addEventListener('click', () => {
+  window.location.reload();
+});
+
+const nameHeader = document.getElementById("name");
+nameHeader.addEventListener("click", () => {
+  window.location.href = "index.html";
+});
+
+// const saveAsPngBtn = document.getElementById('saveAsPngBtn');
+// saveAsPngBtn.addEventListener('click', () => {
+//   html2canvas(paper, { backgroundColor: null }).then(canvas => {
+//     // Convert canvas to PNG and trigger download
+//     const link = document.createElement('a');
+//     link.download = 'mynotetoburn.png';
+//     link.href = canvas.toDataURL('image/png');
+//     link.click();
+//   });
+// });

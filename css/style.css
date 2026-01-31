@@ -79,7 +79,7 @@ body::after {
     background-image: url('/assets/pasted-paper.jpg');
     background-size: 100% 100%;
     mix-blend-mode: multiply;
-    opacity: 0.5;
+    opacity: 0.2;
     pointer-events: none;
     z-index: 100;
 }
@@ -130,6 +130,42 @@ button:disabled {
     pointer-events: none;
     transform: translateZ(-200px);
     filter: drop-shadow(10px 10px 20px #9B4819);
+}
+
+@keyframes bounceIn {
+0% {
+    transform: scale(0.6);
+    opacity: 0;
+}
+
+60% {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+100% {
+    transform: scale(1);
+}
+}
+
+@keyframes zoomOut {    
+0% {
+    transform: scale(1);
+}
+
+100% {
+    transform: scale(.8);
+}
+}
+
+#beginBtn {
+    animation: bounceIn 2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.25s ease-out;
+    will-change: transform;
+}
+
+#beginBtn:hover {
+    transform: scale(0.95);
 }
 
 @media (max-width: 767px) {

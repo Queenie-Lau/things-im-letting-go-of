@@ -1,14 +1,20 @@
+/* ------------------------------------------
+   GLOBAL RESET & BASE STYLING
+------------------------------------------- */
 * {
     box-sizing: border-box;
-    font-family: "Neo Contact W01 Regular";
 }
 
 body {
     overflow-x: hidden;
-    padding: 2%;
     position: relative;
+    font-family: "Neo Contact W01 Regular";
+    background: #fff;
 }
 
+/* ------------------------------------------
+   BACKGROUND
+------------------------------------------- */
 #bg {
     position: fixed;
     inset: 0;
@@ -17,8 +23,13 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     z-index: -10;
+    filter: blur(5px);
+    opacity: 0.7;
 }
 
+/* ------------------------------------------
+   PAPER & NOTE STYLING
+------------------------------------------- */
 .paper {
     position: relative;
     background-image: url('/assets/pasted-paper.jpg');
@@ -48,15 +59,98 @@ body {
     margin-bottom: 12px;
 }
 
+span {
+    font-size: 25px;
+}
+
 input {
     border: none;
     border-bottom: 1px solid #ccc;
     flex: 1;
-    font-size: 16px;
+    font-size: 25px;
+    font-family: "Neo Contact W01 Regular";
     background: transparent;
 }
 
 input:focus {
     outline: none;
     border-bottom-color: #000;
+}
+
+#note {
+    margin: 5%;
+    text-align: center;
+    font-style: italic;
+}
+
+/* ------------------------------------------
+   BUTTONS AS TEXT LINKS WITH HOVER UNDERLINE
+------------------------------------------- */
+button,
+#resetBtn,
+#saveAsPngBtn {
+    padding: 0;
+    font-family: "Neo Contact W01 Regular";
+    font-size: 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: black;
+    position: relative;
+    display: inline-block;
+    transition: color 0.2s ease;
+}
+
+button::after,
+#resetBtn::after,
+#saveAsPngBtn::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background-color: black;
+    transition: width 0.3s ease;
+}
+
+
+#resetBtnContainer {
+    display: flex;
+    justify-content: center;
+}
+
+button:hover::after,
+#resetBtn:hover::after,
+#saveAsPngBtn:hover::after {
+    width: 100%;
+}
+
+button:hover,
+#resetBtn:hover,
+#saveAsPngBtn:hover {
+    color: #9B4819;
+    /* brand accent */
+}
+
+/* ------------------------------------------
+   BUTTON CONTAINERS
+------------------------------------------- */
+.burnBtnContainer,
+.saveAsPng {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* ------------------------------------------
+   NAV
+------------------------------------------- */
+nav {
+    font-family: "Aileron";
+    font-size: 12px;
+    font-weight: bold;
+    color: #9B4819;
+    margin-left: 5%;
+    margin-top: 3%;
 }
