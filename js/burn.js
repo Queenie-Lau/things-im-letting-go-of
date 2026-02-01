@@ -14,7 +14,7 @@ const paper = document.querySelector('.paper');
 const canvas = document.getElementById('burnCanvas');
 const ctx = canvas.getContext('2d');
 const paperImg = new Image();
-paperImg.src = '/assets/pasted-paper.jpg';
+paperImg.src = '../assets/pasted-paper.jpg';
 
 // 1. INPUT LOGIC: typing + creating new lines + enabling burn
 function setupInputLogic() {
